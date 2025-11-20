@@ -54,6 +54,7 @@ body::before {
     opacity: 0;
     transform: translateY(-12px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -70,9 +71,11 @@ body::before {
   transform: translateX(160px);
   transition: transform 600ms ease, opacity 300ms ease;
 }
+
 .hero-knot:hover {
   transform: translateX(160px) rotate(0.5deg) scale(1.01);
 }
+
 /* clockwork-style rotation groups */
 .hero-knot .spin-slow,
 .hero-knot .spin-med,
@@ -84,11 +87,24 @@ body::before {
   animation-timing-function: linear;
   animation-play-state: running;
 }
-.hero-knot .spin-slow { animation-duration: 40s; }
-.hero-knot .spin-med { animation-duration: 24s; }
-.hero-knot .spin-fast { animation-duration: 12s; }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+.hero-knot .spin-slow {
+  animation-duration: 40s;
+}
+
+.hero-knot .spin-med {
+  animation-duration: 24s;
+}
+
+.hero-knot .spin-fast {
+  animation-duration: 12s;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* Refined CTA buttons */
 .cta-button-secondary {
@@ -138,50 +154,131 @@ body::before {
 }
 
 /* Calculator range styling (Tailed-like circular knob) */
+/* Calculator range styling (Tailed-like circular knob) */
 .calc-range {
   -webkit-appearance: none;
   appearance: none;
-  height: 4px;
+  height: 6px;
+  /* Thicker track */
   width: 100%;
-  background-color: #efefef; /* light track */
+  background-color: rgba(0, 0, 0, 0.15);
+  /* Darker track for visibility */
   border-radius: 9999px;
+  cursor: pointer;
 }
-.calc-range:focus { outline: none; }
+
+.calc-range:focus {
+  outline: none;
+}
+
 .calc-range::-webkit-slider-runnable-track {
-  height: 4px;
+  height: 6px;
   background-color: inherit;
   border-radius: 9999px;
 }
+
 .calc-range::-moz-range-track {
-  height: 4px;
+  height: 6px;
   background-color: inherit;
   border-radius: 9999px;
 }
+
 .calc-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  height: 18px;
-  width: 18px;
+  height: 24px;
+  /* Larger thumb */
+  width: 24px;
   border-radius: 9999px;
-  background-color: #fff;
-  border: 3px solid #111; /* neutral ring */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
-  margin-top: -7px; /* center thumb on 4px track */
+  background-color: #111;
+  /* Solid black thumb */
+  border: 2px solid #fff;
+  /* White ring for contrast */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: -9px;
+  /* center thumb on 6px track */
+  transition: transform 0.1s ease;
 }
+
+.calc-range:active::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+
 .calc-range::-moz-range-thumb {
-  height: 18px;
-  width: 18px;
+  height: 24px;
+  width: 24px;
   border-radius: 9999px;
-  background-color: #fff;
-  border: 3px solid #111;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  background-color: #111;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease;
+}
+
+.calc-range:active::-moz-range-thumb {
+  transform: scale(1.1);
 }
 
 /* Dark variant for grey panel */
 .calc-range--dark {
-  background-color: rgba(255,255,255,0.25);
+  background-color: rgba(255, 255, 255, 0.25);
 }
+
 .calc-range--dark::-webkit-slider-thumb {
-  border-color: #ffffff; /* white ring on dark */
+  border-color: #ffffff;
+  /* white ring on dark */
 }
-.calc-range--dark::-moz-range-thumb { border-color: #ffffff; }
+
+.calc-range--dark::-moz-range-thumb {
+  border-color: #ffffff;
+}
+
+/* Hero Graphic Animations */
+@keyframes draw-erase {
+  0% {
+    stroke-dashoffset: 1;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes travel-path {
+  0% {
+    offset-distance: 0%;
+  }
+
+  50% {
+    offset-distance: 100%;
+  }
+
+  100% {
+    offset-distance: 0%;
+  }
+}
+
+@keyframes splatter-pop {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  30% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}

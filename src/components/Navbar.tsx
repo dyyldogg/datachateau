@@ -11,26 +11,12 @@ export default function Navbar() {
             className="h-9 w-auto sm:h-10 md:h-12"
           />
         </Link>
-        <nav className="flex items-center gap-6">
-          <Link
-            href="#"
-            className="text-xs uppercase tracking-[0.12em] text-black/70 hover:text-black"
-          >
-            Home
-          </Link>
-          <Link
-            href="#"
-            className="text-xs uppercase tracking-[0.12em] text-black/70 hover:text-black"
-          >
-            About
-          </Link>
-          <Link
-            href="#"
-            className="text-xs uppercase tracking-[0.12em] text-black/70 hover:text-black"
-          >
-            Contact
-          </Link>
-        </nav>
+        <button
+          className="rounded-full bg-black px-5 py-2 text-xs font-medium uppercase tracking-wide text-white transition-transform hover:scale-105 active:scale-95"
+          style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+        >
+          Book a demo
+        </button>
       </div>
     </header>
   );

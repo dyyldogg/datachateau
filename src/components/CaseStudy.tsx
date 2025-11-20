@@ -12,7 +12,7 @@ export default function CaseStudy() {
         <img src="/arixa-logo-transparent.svg" alt="Arixa Capital" className="h-10 w-auto sm:h-12" />
       </div>
 
-      <div className="rounded-2xl border border-black/10 bg-white/70 p-6 shadow-sm sm:p-10">
+      <div className="rounded-2xl p-6 sm:p-10">
         {/* Body */}
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
           {/* Left narrative */}
@@ -49,9 +49,9 @@ export default function CaseStudy() {
           <div className="grid grid-rows-3 gap-6 sm:gap-7">
             {Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="grid grid-cols-[1fr_auto_1fr] items-center gap-5">
-                <div className="h-20 w-full rounded-2xl border border-black/15 bg-white" />
+                <div className="h-20 w-full rounded-2xl bg-black/5" />
                 <div className="flex items-center justify-center text-xl text-black/50">→</div>
-                <div className="h-20 w-full rounded-2xl border border-black/15 bg-white" />
+                <div className="h-20 w-full rounded-2xl bg-black/5" />
               </div>
             ))}
           </div>

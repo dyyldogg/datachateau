@@ -13,7 +13,7 @@ export default function RoiCalculator() {
   const [numAnalysts, setNumAnalysts] = useState<number>(5);
 
   const results = useMemo(() => {
-    // Fixed assumptions (domain-specific but simple and explainable)
+    // Fixed assumptions
     const ORIGINATION_FEE = 0.015; // 1.5% of principal
     const ANALYST_SALARY_TOTAL_COMP = 170_000; // per year, fully loaded
     const VINDIUM_REGAIN_SHARE = 0.3; // ~30% analyst-equivalent throughput
@@ -44,17 +44,25 @@ export default function RoiCalculator() {
   }, [inboundPerMonth, avgDealSize, numAnalysts]);
 
   return (
-    <section className="mx-auto mt-6 w-full max-w-6xl" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
-      <div className="grid gap-0 overflow-hidden rounded-2xl border border-black/10 bg-white/70 shadow-sm lg:grid-cols-2">
-        {/* Left: inputs (grey with white sliders/text) */}
-        <div className="relative flex min-h-[360px] flex-col justify-start bg-[#2b2b2b] p-6 pt-4 text-white sm:p-8 sm:pt-6">
-          <h4 className="mb-4 text-2xl font-medium sm:text-3xl">Predict your capacity lift</h4>
+    <section className="mx-auto mt-24 w-full max-w-6xl px-4" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
+      <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
 
-          <div className="space-y-6">
-            <label className="block">
-              <div className="mb-2 flex items-center justify-between text-sm text-white/80">
-                <span>Inbound loan requests / month</span>
-                <span className="tabular-nums text-white">{inboundPerMonth}</span>
+        {/* Left Column: Inputs (Clean Form) */}
+        <div className="flex flex-col justify-center">
+          <h4 className="mb-10 text-3xl font-normal text-black sm:text-4xl" style={{ fontFamily: "var(--font-playfair)" }}>
+            Predict your capacity lift
+          </h4>
+
+          <div className="space-y-10">
+            {/* Input 1 */}
+            <div className="border-b border-black/10 pb-8">
+              <div className="mb-4 flex items-end justify-between">
+                <label className="text-sm font-medium uppercase tracking-wide text-black/60">
+                  Inbound loan requests / month
+                </label>
+                <span className="text-3xl font-normal text-black" style={{ fontFamily: "var(--font-playfair)" }}>
+                  {inboundPerMonth}
+                </span>
               </div>
               <input
                 type="range"
@@ -63,14 +71,19 @@ export default function RoiCalculator() {
                 step={1}
                 value={inboundPerMonth}
                 onChange={(e) => setInboundPerMonth(Number(e.target.value))}
-                className="calc-range calc-range--dark"
+                className="calc-range"
               />
-            </label>
+            </div>
 
-            <label className="block">
-              <div className="mb-2 flex items-center justify-between text-sm text-white/80">
-                <span>Average deal size (USD)</span>
-                <span className="tabular-nums text-white">{formatCurrency(avgDealSize)}</span>
+            {/* Input 2 */}
+            <div className="border-b border-black/10 pb-8">
+              <div className="mb-4 flex items-end justify-between">
+                <label className="text-sm font-medium uppercase tracking-wide text-black/60">
+                  Average deal size
+                </label>
+                <span className="text-3xl font-normal text-black" style={{ fontFamily: "var(--font-playfair)" }}>
+                  {formatCurrency(avgDealSize)}
+                </span>
               </div>
               <input
                 type="range"
@@ -79,14 +92,19 @@ export default function RoiCalculator() {
                 step={50_000}
                 value={avgDealSize}
                 onChange={(e) => setAvgDealSize(Number(e.target.value))}
-                className="calc-range calc-range--dark"
+                className="calc-range"
               />
-            </label>
+            </div>
 
-            <label className="block">
-              <div className="mb-2 flex items-center justify-between text-sm text-white/80">
-                <span>Number of analysts</span>
-                <span className="tabular-nums text-white">{numAnalysts}</span>
+            {/* Input 3 */}
+            <div className="border-b border-black/10 pb-8">
+              <div className="mb-4 flex items-end justify-between">
+                <label className="text-sm font-medium uppercase tracking-wide text-black/60">
+                  Number of analysts
+                </label>
+                <span className="text-3xl font-normal text-black" style={{ fontFamily: "var(--font-playfair)" }}>
+                  {numAnalysts}
+                </span>
               </div>
               <input
                 type="range"
@@ -95,55 +113,49 @@ export default function RoiCalculator() {
                 step={1}
                 value={numAnalysts}
                 onChange={(e) => setNumAnalysts(Number(e.target.value))}
-                className="calc-range calc-range--dark"
+                className="calc-range"
               />
-            </label>
+            </div>
           </div>
         </div>
 
-        {/* Right: results (white with black text) */}
-        <div className="relative flex min-h-[360px] items-center bg-white text-black">
-          <div className="relative z-10 w-full p-6 sm:p-10">
-            <div className="mb-6 flex items-end gap-3 text-black/70">
-              <img src="/vinidum-written-logo.svg" alt="Vindium" className="h-8 w-auto translate-y-[4px]" />
-              <span className="text-sm">calculation</span>
+        {/* Right Column: Results (Distinct Card) */}
+        <div className="flex items-center">
+          <div className="relative w-full overflow-hidden rounded-2xl bg-[#fffcf5] p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] ring-1 ring-black/5 sm:p-12">
+            <div className="mb-8 flex items-center gap-3 opacity-60">
+              <img src="/vinidum-written-logo.svg" alt="Vindium" className="h-6 w-auto" />
+              <div className="h-px flex-1 bg-black/20"></div>
+              <span className="text-xs font-medium uppercase tracking-wider">Projection</span>
             </div>
-            <p className="text-2xl font-medium leading-snug">
-              You could add
-              <span className="mx-2 whitespace-nowrap underline decoration-black/20 underline-offset-4">
-                {formatCurrency(results.lostRevenue)}
-              </span>
-              per month to your team's revenue with Vindium!
-            </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-lg border border-black/10 bg-white p-3">
-                <div className="text-xs uppercase tracking-wide text-black/60">Missed volume</div>
-                <div className="mt-1 text-base font-medium">{formatCurrency(results.missedDealVolume)}</div>
+            <div className="space-y-2">
+              <p className="text-lg text-black/70">Potential monthly revenue increase:</p>
+              <p className="text-5xl font-normal text-black sm:text-6xl" style={{ fontFamily: "var(--font-playfair)" }}>
+                {formatCurrency(results.lostRevenue)}
+              </p>
+            </div>
+
+            <div className="mt-10 space-y-6 border-t border-black/10 pt-8">
+              <div className="flex justify-between">
+                <span className="text-black/60">Missed deal volume</span>
+                <span className="font-medium">{formatCurrency(results.missedDealVolume)}</span>
               </div>
-              <div className="rounded-lg border border-black/10 bg-white p-3">
-                <div className="text-xs uppercase tracking-wide text-black/60">Lost revenue</div>
-                <div className="mt-1 text-base font-medium">{formatCurrency(results.lostRevenue)}</div>
-              </div>
-              <div className="rounded-lg border border-black/10 bg-white p-3">
-                <div className="text-xs uppercase tracking-wide text-black/60">Analyst cost</div>
-                <div className="mt-1 text-base font-medium">{formatCurrency(results.monthlyAnalystCost)}</div>
+              <div className="flex justify-between">
+                <span className="text-black/60">Current analyst cost</span>
+                <span className="font-medium">{formatCurrency(results.monthlyAnalystCost)}</span>
               </div>
             </div>
 
             <button
               type="button"
-              className="mt-6 inline-flex items-center justify-center rounded-full border border-black/25 bg-transparent px-5 py-3 text-sm font-medium text-black transition-all hover:bg-black/5 hover:shadow-sm"
-              aria-label="Get an exact calculation"
+              className="mt-10 w-full rounded-full bg-black py-4 text-sm font-medium text-white transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              Get an exact calculation
-              <span className="ml-2 transition-transform group-hover:translate-x-0.5">→</span>
+              Get a detailed report
             </button>
           </div>
         </div>
+
       </div>
     </section>
   );
 }
-
-
