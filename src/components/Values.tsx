@@ -1,3 +1,5 @@
+import { Users, Heart } from "lucide-react";
+
 export default function Values() {
   return (
     <section className="mx-auto mt-24 w-full max-w-6xl px-4">
@@ -16,7 +18,7 @@ export default function Values() {
               sensitive data stays protected.
             </p>
 
-            <div className="mt-8 grid gap-8 sm:grid-cols-2">
+            <div className="mt-8 grid gap-8 sm:grid-cols-3">
               <div>
                 <h3
                   className="text-xl font-medium text-white"
@@ -57,10 +59,10 @@ export default function Values() {
           </div>
 
           <div className="flex items-start justify-center lg:justify-end">
-            <div className="rounded-xl border border-white/10 bg-white/5 p-6 text-center">
+            <div className="rounded-xl border border-white/20 bg-white/5 p-6 text-center shadow-[0_0_30px_-10px_rgba(255,255,255,0.1)] backdrop-blur-sm">
               <div className="text-sm uppercase tracking-wide text-white/70">We are</div>
-              <div className="mt-1 text-lg text-white">SOC 2</div>
-              <div className="mt-1 text-sm text-white/70">Focused</div>
+              <div className="mt-1 text-xl font-semibold text-white">SOC 2</div>
+              <div className="mt-1 text-sm text-white/70">Compliant</div>
             </div>
           </div>
         </div>
@@ -68,7 +70,9 @@ export default function Values() {
         <div className="border-t border-white/10 p-6 sm:p-10">
           <div className="grid gap-10 lg:grid-cols-2">
             <div className="flex items-start gap-5">
-              <div className="h-14 w-14 shrink-0 rounded-2xl bg-white/10" />
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10">
+                <Users className="h-6 w-6 text-white" strokeWidth={1.5} />
+              </div>
               <div>
                 <h3
                   className="text-xl font-medium text-white"
@@ -83,7 +87,9 @@ export default function Values() {
               </div>
             </div>
             <div className="flex items-start gap-5">
-              <div className="h-14 w-14 shrink-0 rounded-2xl bg-white/10" />
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10">
+                <Heart className="h-6 w-6 text-white" strokeWidth={1.5} />
+              </div>
               <div>
                 <h3
                   className="text-xl font-medium text-white"
@@ -103,5 +109,3 @@ export default function Values() {
     </section>
   );
 }
-
-

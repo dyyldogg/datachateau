@@ -11,12 +11,13 @@ export default function Navbar() {
             className="h-9 w-auto sm:h-10 md:h-12"
           />
         </Link>
-        <button
+        <Link
+          href="/contact"
           className="rounded-full bg-black px-5 py-2 text-xs font-medium uppercase tracking-wide text-white transition-transform hover:scale-105 active:scale-95"
           style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
         >
           Book a demo
-        </button>
+        </Link>
       </div>
     </header>
   );

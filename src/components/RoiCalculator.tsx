@@ -8,95 +8,98 @@ function formatCurrency(value: number): string {
 }
 
 export default function RoiCalculator() {
-  const [inboundPerMonth, setInboundPerMonth] = useState<number>(40);
-  const [avgDealSize, setAvgDealSize] = useState<number>(1_000_000);
+  // Inputs
+  const [inboundLoansPerMonth, setInboundLoansPerMonth] = useState<number>(40); // 10–100
+  const [avgLoanSize, setAvgLoanSize] = useState<number>(5_000_000); // 1.5m–200m
   const [numAnalysts, setNumAnalysts] = useState<number>(5);
+  
+  // Hidden constants
+  const ANALYST_COST_PER_YEAR = 170_000;
+  const APPROVAL_RATE = 0.6; // 60% funded
+  const REVENUE_MARGIN_PCT = 0.02; // 2% all-in revenue per funded loan
 
   const results = useMemo(() => {
-    // Fixed assumptions
-    const ORIGINATION_FEE = 0.015; // 1.5% of principal
-    const ANALYST_SALARY_TOTAL_COMP = 170_000; // per year, fully loaded
-    const VINDIUM_REGAIN_SHARE = 0.3; // ~30% analyst-equivalent throughput
-    const ANALYST_DEALS_PER_WEEK = 0.3; // per analyst
-    const WEEKS_PER_MONTH = 4.33;
+    // Logic: Total Value = (Monthly Revenue Lift) + (Monthly Cost Savings)
+    // Efficiency scales down with more analysts (diminishing returns)
+    // Start at 50% for 1 analyst, decay to ~15% for 30 analysts
+    const BASE_EFFICIENCY = 0.50; 
+    const DECAY_EXPONENT = -0.35;
+    const efficiencyGain = BASE_EFFICIENCY * Math.pow(numAnalysts, DECAY_EXPONENT);
 
-    // Current capacity and missed demand
-    const currentCapacityDeals = numAnalysts * ANALYST_DEALS_PER_WEEK * WEEKS_PER_MONTH;
-    const currentMissedDeals = Math.max(inboundPerMonth - currentCapacityDeals, 0);
-    const missedDealVolume = currentMissedDeals * avgDealSize;
+    // 1. Cost Savings (Monthly)
+    const totalAnalystSpendYear = numAnalysts * ANALYST_COST_PER_YEAR;
+    const annualCostSavings = totalAnalystSpendYear * efficiencyGain;
+    const monthlyCostSavings = annualCostSavings / 12;
+    
+    // 2. Revenue Capacity (Monthly)
+    const baseMonthlyRevenue = inboundLoansPerMonth * avgLoanSize * APPROVAL_RATE * REVENUE_MARGIN_PCT;
+    const monthlyRevenueLift = baseMonthlyRevenue * efficiencyGain;
 
-    // Potential regained capacity via Vindium (30% analyst-equivalent capacity)
-    const regainedCapacityDeals = numAnalysts * VINDIUM_REGAIN_SHARE * ANALYST_DEALS_PER_WEEK * WEEKS_PER_MONTH;
-    const regainedDeals = Math.min(currentMissedDeals, regainedCapacityDeals);
-    const regainedDealVolume = regainedDeals * avgDealSize;
-    const regainedFeeRevenue = regainedDealVolume * ORIGINATION_FEE;
-
-    // Cost context
-    const monthlyAnalystCost = (ANALYST_SALARY_TOTAL_COMP * numAnalysts) / 12;
-    const roiMultiple = monthlyAnalystCost > 0 ? regainedFeeRevenue / monthlyAnalystCost : 0;
+    // 3. Total Value Impact (Monthly Headline)
+    const totalMonthlyValue = monthlyRevenueLift + monthlyCostSavings;
 
     return {
-      missedDealVolume,
-      lostRevenue: regainedFeeRevenue,
-      monthlyAnalystCost,
-      roiMultiple,
+      totalMonthlyValue,
+      monthlyRevenueLift,
+      monthlyCostSavings,
+      efficiencyGain,
     };
-  }, [inboundPerMonth, avgDealSize, numAnalysts]);
+  }, [inboundLoansPerMonth, avgLoanSize, numAnalysts]);
 
   return (
     <section className="mx-auto mt-24 w-full max-w-6xl px-4" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
 
-        {/* Left Column: Inputs (Clean Form) */}
+        {/* Left Column: Inputs */}
         <div className="flex flex-col justify-center">
           <h4 className="mb-10 text-3xl font-normal text-black sm:text-4xl" style={{ fontFamily: "var(--font-playfair)" }}>
             Predict your capacity lift
           </h4>
 
           <div className="space-y-10">
-            {/* Input 1 */}
+            {/* Input 1: Inbound */}
             <div className="border-b border-black/10 pb-8">
               <div className="mb-4 flex items-end justify-between">
                 <label className="text-sm font-medium uppercase tracking-wide text-black/60">
                   Inbound loan requests / month
                 </label>
                 <span className="text-3xl font-normal text-black" style={{ fontFamily: "var(--font-playfair)" }}>
-                  {inboundPerMonth}
+                  {inboundLoansPerMonth}
                 </span>
               </div>
               <input
                 type="range"
-                min={7}
+                min={10}
                 max={100}
                 step={1}
-                value={inboundPerMonth}
-                onChange={(e) => setInboundPerMonth(Number(e.target.value))}
+                value={inboundLoansPerMonth}
+                onChange={(e) => setInboundLoansPerMonth(Number(e.target.value))}
                 className="calc-range"
               />
             </div>
 
-            {/* Input 2 */}
+            {/* Input 2: Avg Deal Size */}
             <div className="border-b border-black/10 pb-8">
               <div className="mb-4 flex items-end justify-between">
                 <label className="text-sm font-medium uppercase tracking-wide text-black/60">
-                  Average deal size
+                  Average funded loan size (USD)
                 </label>
                 <span className="text-3xl font-normal text-black" style={{ fontFamily: "var(--font-playfair)" }}>
-                  {formatCurrency(avgDealSize)}
+                  {formatCurrency(avgLoanSize)}
                 </span>
               </div>
               <input
                 type="range"
-                min={500_000}
-                max={250_000_000}
-                step={50_000}
-                value={avgDealSize}
-                onChange={(e) => setAvgDealSize(Number(e.target.value))}
+                min={1_500_000}
+                max={200_000_000}
+                step={500_000}
+                value={avgLoanSize}
+                onChange={(e) => setAvgLoanSize(Number(e.target.value))}
                 className="calc-range"
               />
             </div>
 
-            {/* Input 3 */}
+            {/* Input 3: Analysts */}
             <div className="border-b border-black/10 pb-8">
               <div className="mb-4 flex items-end justify-between">
                 <label className="text-sm font-medium uppercase tracking-wide text-black/60">
@@ -109,7 +112,7 @@ export default function RoiCalculator() {
               <input
                 type="range"
                 min={1}
-                max={50}
+                max={30}
                 step={1}
                 value={numAnalysts}
                 onChange={(e) => setNumAnalysts(Number(e.target.value))}
@@ -117,9 +120,13 @@ export default function RoiCalculator() {
               />
             </div>
           </div>
+          
+          <p className="mt-4 text-xs text-black/50">
+            Assumes {(results.efficiencyGain * 100).toFixed(0)}% efficiency gain from AI automation (diminishing returns with scale).
+          </p>
         </div>
 
-        {/* Right Column: Results (Distinct Card) */}
+        {/* Right Column: Results */}
         <div className="flex items-center">
           <div className="relative w-full overflow-hidden rounded-2xl bg-[#fffcf5] p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] ring-1 ring-black/5 sm:p-12">
             <div className="mb-8 flex items-center gap-3 opacity-60">
@@ -129,20 +136,20 @@ export default function RoiCalculator() {
             </div>
 
             <div className="space-y-2">
-              <p className="text-lg text-black/70">Potential monthly revenue increase:</p>
+              <p className="text-lg text-black/70">Total monthly value impact:</p>
               <p className="text-5xl font-normal text-black sm:text-6xl" style={{ fontFamily: "var(--font-playfair)" }}>
-                {formatCurrency(results.lostRevenue)}
+                {formatCurrency(results.totalMonthlyValue)}
               </p>
             </div>
 
             <div className="mt-10 space-y-6 border-t border-black/10 pt-8">
               <div className="flex justify-between">
-                <span className="text-black/60">Missed deal volume</span>
-                <span className="font-medium">{formatCurrency(results.missedDealVolume)}</span>
+                <span className="text-black/60">Revenue capacity added (mo)</span>
+                <span className="font-medium">{formatCurrency(results.monthlyRevenueLift)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-black/60">Current analyst cost</span>
-                <span className="font-medium">{formatCurrency(results.monthlyAnalystCost)}</span>
+                <span className="text-black/60">Analyst cost savings (mo)</span>
+                <span className="font-medium">{formatCurrency(results.monthlyCostSavings)}</span>
               </div>
             </div>
 
