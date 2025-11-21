@@ -8,7 +8,7 @@ export default function FooterCta() {
           className="text-3xl font-normal leading-tight tracking-tight text-black sm:text-4xl"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
-          Ready to Experience the Intelligence Gains Only Vindium Can Provide?
+          Ready to experience the intelligence gains only Vindium can provide?
         </h2>
         <Link
           href="/contact"

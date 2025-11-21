@@ -13,7 +13,7 @@ export default function Navbar() {
         </Link>
         <Link
           href="/contact"
-          className="rounded-full bg-black px-5 py-2 text-xs font-medium uppercase tracking-wide text-white transition-transform hover:scale-105 active:scale-95"
+          className="rounded-full bg-black px-5 py-2 text-xs font-medium tracking-wide text-white transition-transform hover:scale-105 active:scale-95"
           style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
         >
           Book a demo
@@ -22,5 +22,3 @@ export default function Navbar() {
     </header>
   );
 }
-
-

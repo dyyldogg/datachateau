@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Plane } from "lucide-react";
 import HeroGraphic from "@/components/HeroGraphic";
 import RoiCalculator from "@/components/RoiCalculator";
 import CaseStudy from "@/components/CaseStudy";
@@ -38,40 +40,33 @@ export default function Home() {
         <div className="col-start-1 row-start-3 flex flex-col justify-start max-w-md pb-12">
           <p className="text-lg leading-relaxed text-black/90 subhead-copy opacity-0 animate-[drop-in_1000ms_cubic-bezier(0.2,0.8,0.2,1)_1.8s_both]">
             We build AI agents and outsource contractors to{" "}
-            <span className="emphasis-highlight">automate the repetitive tasks slowing your team down</span>
+            <span className="emphasis-highlight">
+              automate the repetitive tasks slowing your team down
+            </span>
             , so you can originate deals lightning fast
           </p>
-          
+
           <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:gap-6 opacity-0 animate-[drop-in_1000ms_cubic-bezier(0.2,0.8,0.2,1)_2.0s_both]">
-            <button
-              className="cta-button-secondary group relative overflow-hidden rounded-full border border-black/10 bg-transparent px-8 py-3.5 text-sm font-medium tracking-wide text-black/80 transition-all duration-300 hover:border-black/25 hover:bg-black/5 hover:text-black hover:shadow-[0_2px_6px_rgba(0,0,0,0.1)] hover:scale-105"
-              style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
-            >
-              <span className="relative z-10 inline-block transition-transform duration-300 group-hover:translate-x-1">
-                Past results
-              </span>
-            </button>
-            <button
+            <Link
+              href="/contact"
               className="group relative overflow-visible rounded-full border border-black/15 bg-transparent px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-all duration-300 hover:border-black/30 hover:bg-black/5 hover:-translate-y-0.5"
               style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
             >
               <span className="relative z-10 flex items-center gap-2">
                 Have us fly out to you
-                <svg
-                  className="h-4 w-4 transition-all duration-500 ease-out group-hover:translate-x-10 group-hover:-translate-y-4 group-hover:opacity-0"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
+                <Plane
+                  className="h-4 w-4 transition-all duration-500 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0"
                   aria-hidden="true"
-                >
-                   <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
-                </svg>
+                />
               </span>
 
               {/* Tooltip */}
               <div className="absolute left-1/2 top-full mt-4 w-72 -translate-x-1/2 rounded-xl border border-black/10 bg-white p-4 text-left text-xs leading-relaxed text-black/80 opacity-0 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100 invisible z-50">
-                We take our potential clients very seriously - we will fly out to you to learn about your business's bottleneck without expectation of a sale.
+                We take our potential clients very seriously - we will fly out
+                to you to learn about your business's bottleneck without
+                expectation of a sale.
               </div>
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -124,14 +119,17 @@ export default function Home() {
           className="text-3xl font-normal leading-[1.15] tracking-tight text-black sm:text-4xl"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
-          We’ve found most private lenders leave 30–40% of deal flow on the table every month.
+          We’ve found most private lenders leave 30–40% of deal flow on the
+          table every month.
         </h2>
         <h2 className="mt-6 text-base leading-7 text-black/80 subhead-copy sm:text-lg">
-          Manual intake and underwriting bottlenecks limit how many loans your team can process.
-          {" "}
-          <span className="emphasis-highlight">Hiring and training analysts is expensive and slow</span>.
-          {" "}
-          Vindium automates those repetitive workflows so your team can handle every deal that comes in.
+          Manual intake and underwriting bottlenecks limit how many loans your
+          team can process.{" "}
+          <span className="emphasis-highlight">
+            Hiring and training analysts is expensive and slow
+          </span>
+          . Vindium automates those repetitive workflows so your team can handle
+          every deal that comes in.
         </h2>
       </section>
 
@@ -147,9 +145,6 @@ export default function Home() {
       {/* Bottom CTA + minimal footer */}
       <FooterCta />
       <Footer />
-
-
-
     </main>
   );
 }

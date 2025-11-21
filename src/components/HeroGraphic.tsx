@@ -107,7 +107,13 @@ function getRoughEllipsePath(
 }
 
 // Generate a rough line
-function getRoughLine(x1: number, y1: number, x2: number, y2: number, seed: number) {
+function getRoughLine(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  seed: number
+) {
   const noise = (s: number) => (seededRandom(s) - 0.5) * 8;
   const midX = (x1 + x2) / 2 + noise(seed);
   const midY = (y1 + y2) / 2 + noise(seed + 1);
@@ -124,7 +130,7 @@ export default function HeroGraphic() {
     let idCounter = 0;
 
     // 1. Concentric Circles
-    for (let i = 0; i < 6; i++) {
+    for (let i = 1; i < 6; i++) {
       const r = 60 + i * 45;
       const seed = idCounter++ * 99;
       const path = getRoughCirclePath(CX, CY, r, seed);
@@ -134,21 +140,9 @@ export default function HeroGraphic() {
         width: 1.5 + seededRandom(seed) * 2,
         duration: (15 + seededRandom(seed) * 10) * SPEED_FACTOR,
         delay: seededRandom(seed + 1) * -10,
-        type: 'circle'
+        type: "circle",
       });
     }
-
-    // 2. Primary Large Circle
-    const primaryR = 320;
-    const primarySeed = 777;
-    items.push({
-      id: 'primary-circle',
-      path: getRoughCirclePath(CX, CY, primaryR, primarySeed),
-      width: 4,
-      duration: 25 * SPEED_FACTOR,
-      delay: -5,
-      type: 'primary'
-    });
 
     // 3. Ellipses
     const angles = [0, 30, 60, 90, 120, 150];
@@ -161,7 +155,7 @@ export default function HeroGraphic() {
         width: 1 + seededRandom(seed) * 1.5,
         duration: (20 + seededRandom(seed) * 10) * SPEED_FACTOR,
         delay: seededRandom(seed) * -15,
-        type: 'ellipse'
+        type: "ellipse",
       });
     });
 
@@ -180,7 +174,7 @@ export default function HeroGraphic() {
         width: 1 + seededRandom(seed),
         duration: (12 + seededRandom(seed) * 8) * SPEED_FACTOR,
         delay: seededRandom(seed) * -5,
-        type: 'spoke'
+        type: "spoke",
       });
     }
 
@@ -211,7 +205,7 @@ export default function HeroGraphic() {
         cy: y,
         r: size,
         duration,
-        delay
+        delay,
       });
     }
     return dots;
@@ -234,7 +228,14 @@ export default function HeroGraphic() {
             <stop offset="100%" stopColor="#000" stopOpacity="0" />
           </radialGradient>
         </defs>
-        <rect x="0" y="0" width="800" height="800" fill="url(#fade)" opacity="0.1" />
+        <rect
+          x="0"
+          y="0"
+          width="800"
+          height="800"
+          fill="url(#fade)"
+          opacity="0.1"
+        />
 
         {/* Shapes */}
         {shapes.map((s) => (
@@ -243,7 +244,7 @@ export default function HeroGraphic() {
             d={s.path}
             stroke="#111"
             strokeWidth={s.width}
-            strokeOpacity={s.type === 'primary' ? 0.9 : 0.7}
+            strokeOpacity={s.type === "primary" ? 0.9 : 0.7}
             strokeLinecap="round"
             fill="none"
             pathLength={1}
@@ -267,7 +268,7 @@ export default function HeroGraphic() {
             style={{
               animation: `splatter-pop ${s.duration}s ease-in-out infinite`,
               animationDelay: `${s.delay}s`,
-              transformOrigin: `${s.cx}px ${s.cy}px`
+              transformOrigin: `${s.cx}px ${s.cy}px`,
             }}
           />
         ))}

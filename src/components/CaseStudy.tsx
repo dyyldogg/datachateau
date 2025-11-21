@@ -23,9 +23,24 @@ export default function CaseStudy() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-black">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
               </div>
-              <h3 className="text-3xl font-normal text-black" style={{ fontFamily: "var(--font-playfair)" }}>
+              <h3
+                className="text-3xl font-normal text-black"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
                 Their problem
               </h3>
             </div>
@@ -49,9 +64,23 @@ export default function CaseStudy() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-black">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
               </div>
-              <h3 className="text-3xl font-normal text-black" style={{ fontFamily: "var(--font-playfair)" }}>
+              <h3
+                className="text-3xl font-normal text-black"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
                 Our solution
               </h3>
             </div>
@@ -76,33 +105,34 @@ export default function CaseStudy() {
         <div className="relative overflow-hidden rounded-3xl bg-[#F5F5F0] border border-black/5 p-8 sm:p-12 shadow-sm">
           {/* Background decoration */}
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-green-400/10 blur-3xl" />
-          
-          <h3 className="text-lg font-medium uppercase tracking-wide text-black/50">
+
+          <h3 className="text-lg font-medium tracking-wide text-black/50">
             The Result
           </h3>
-          
+
           <div className="mt-6">
             <div className="flex items-baseline gap-2">
               <span className="text-6xl font-medium tracking-tighter text-black sm:text-7xl">
                 $3.5M
               </span>
-              <span className="text-xl font-medium text-black/70 sm:text-2xl">
-                + added
-              </span>
             </div>
             <p className="mt-2 text-xl text-black/60">
-              to the bottom line in just 4 months
+              added to the bottom line in just 4 months
             </p>
           </div>
 
           <div className="mt-10 grid grid-cols-2 gap-8 border-t border-black/10 pt-8">
             <div>
               <div className="text-4xl font-medium text-black">40%</div>
-              <div className="mt-1 text-sm font-medium text-black/50 uppercase tracking-wide">Reduction in Grunt Work</div>
+              <div className="mt-1 text-sm font-medium text-black/50">
+                Reduction in Grunt Work
+              </div>
             </div>
             <div>
               <div className="text-4xl font-medium text-black">2x</div>
-              <div className="mt-1 text-sm font-medium text-black/50 uppercase tracking-wide">Deal Throughput</div>
+              <div className="mt-1 text-sm font-medium text-black/50">
+                Deal Throughput
+              </div>
             </div>
           </div>
         </div>
