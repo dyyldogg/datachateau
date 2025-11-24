@@ -21,6 +21,12 @@ variable "instance_type" {
   default     = "t3.micro"
 }
 
+variable "domain_name" {
+  description = "The domain name for the website"
+  type        = string
+  default     = "example.com"
+}
+
 # Key Pair
 resource "tls_private_key" "pk" {
   algorithm = "RSA"
@@ -91,14 +97,9 @@ resource "aws_instance" "web" {
 
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
-  user_data = <<-EOF
-              #!/bin/bash
-              apt-get update
-              apt-get install -y docker.io
-              systemctl start docker
-              systemctl enable docker
-              usermod -aG docker ubuntu
-              EOF
+  user_data = templatefile("${path.module}/user_data.sh", {
+    domain_name = var.domain_name
+  })
 
   tags = {
     Name = "VindiumSite"
