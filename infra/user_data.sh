@@ -31,9 +31,28 @@ systemctl restart nginx
 
 # 3. Request SSL Certificate (This will auto-update Nginx config)
 # We use --non-interactive and --agree-tos for automation
-# Note: This might fail if DNS hasn't propagated yet. 
-# You might need to run 'certbot --nginx' manually via SSH if it fails here.
-certbot --nginx --non-interactive --agree-tos -m $EMAIL -d $DOMAIN
+# We add a simple retry mechanism and a fallback script
+MAX_ATTEMPTS=5
+for i in $(seq 1 $MAX_ATTEMPTS); do
+    if certbot --nginx --non-interactive --agree-tos -m $EMAIL -d $DOMAIN; then
+        echo "Certificate obtained successfully."
+        break
+    fi
+    echo "Certbot attempt $i failed. Waiting 30 seconds..."
+    sleep 30
+done
+
+# If certbot still failed (e.g. DNS not propagated), create a manual setup script
+if [ ! -d "/etc/letsencrypt/live/$DOMAIN" ]; then
+    echo "Certbot failed after $MAX_ATTEMPTS attempts. Creating manual setup script."
+    cat > /home/ubuntu/setup_ssl.sh <<EOF
+#!/bin/bash
+echo "Attempting to request SSL certificate for $DOMAIN..."
+sudo certbot --nginx --non-interactive --agree-tos -m $EMAIL -d $DOMAIN
+EOF
+    chmod +x /home/ubuntu/setup_ssl.sh
+    chown ubuntu:ubuntu /home/ubuntu/setup_ssl.sh
+fi
 
 # 4. Setup Auto-Renewal
 # Certbot installs a systemd timer automatically, so we are good there.
