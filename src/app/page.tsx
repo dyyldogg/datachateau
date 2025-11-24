@@ -90,29 +90,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="demo" className="mx-auto mt-32 w-full max-w-5xl">
-        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl">
-          <video
-            className="h-full w-full object-cover will-change-transform"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster="/demo-poster.jpg"
-            aria-label="Vindium product demo video"
-          >
-            {/* Prefer refined crop (v2) centered to keep input bar and remove pillar */}
-            <source src="/demo-framed2.mp4" type="video/mp4" />
-            <source src="/demo-framed.webm" type="video/webm" />
-            {/* Fallbacks */}
-            <source src="/demo-letterbox.mp4" type="video/mp4" />
-            {/* Fallback to raw OBS capture (filename contains spaces → URL-encoded) */}
-            <source src="/2025-11-04%2016-29-09.mov" type="video/quicktime" />
-          </video>
-        </div>
-      </section>
-
       {/* Headline + supporting h2 */}
       <section className="mx-auto mt-40 w-full max-w-5xl px-2">
         <h2
