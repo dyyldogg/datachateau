@@ -106,10 +106,16 @@ resource "aws_instance" "web" {
   }
 }
 
+# Elastic IP
+resource "aws_eip" "lb" {
+  instance = aws_instance.web.id
+  domain   = "vpc"
+}
+
 # Output
 output "instance_ip" {
   description = "Public IP of the EC2 instance"
-  value       = aws_instance.web.public_ip
+  value       = aws_eip.lb.public_ip
 }
 
 output "private_key" {
