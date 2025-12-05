@@ -11,7 +11,7 @@ export default function CaseStudy() {
         </h2>
         <img
           src="/arixa-logo-transparent.svg"
-          alt="Arixa Capital"
+          alt="Bridge Lending Firm"
           className="h-8 w-auto sm:h-10 opacity-90"
         />
       </div>
