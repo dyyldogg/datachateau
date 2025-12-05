@@ -7,13 +7,8 @@ export default function CaseStudy() {
           className="text-4xl font-normal leading-tight tracking-tight text-black sm:text-5xl"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
-          Case study:
+          Case study: Bridge Lending Firm
         </h2>
-        <img
-          src="/arixa-logo-transparent.svg"
-          alt="Bridge Lending Firm"
-          className="h-8 w-auto sm:h-10 opacity-90"
-        />
       </div>
 
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
