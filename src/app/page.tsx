@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Plane } from "lucide-react";
 import HeroGraphic from "@/components/HeroGraphic";
 import RoiCalculator from "@/components/RoiCalculator";
 import CaseStudy from "@/components/CaseStudy";
@@ -18,7 +17,7 @@ export default function Home() {
             className="text-left text-[clamp(2.5rem,5vw,4.5rem)] font-normal leading-[1.1] tracking-tight text-black opacity-0 animate-[drop-in_900ms_cubic-bezier(0.2,0.8,0.2,1)_0.5s_both]"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Dear private real estate lenders,
+            Dear AI labs,
           </h1>
         </div>
 
@@ -30,41 +29,35 @@ export default function Home() {
           >
             stop letting
             <br />
-            busywork kill
+            labor costs
             <br />
-            your dealflow.
+            limit your scale.
           </h2>
         </div>
 
         {/* Row 3, Col 1: Subtext */}
         <div className="col-start-1 row-start-3 flex flex-col justify-start max-w-md pb-12">
           <p className="text-lg leading-relaxed text-black/90 subhead-copy opacity-0 animate-[drop-in_1000ms_cubic-bezier(0.2,0.8,0.2,1)_1.8s_both]">
-            We build AI agents and outsource contractors to{" "}
+            We provide{" "}
             <span className="emphasis-highlight">
-              automate the repetitive tasks slowing your team down
+              skilled human labor at competitive rates
             </span>
-            , so you can originate deals lightning fast
+            , so you can scale your operations without breaking the budget
           </p>
 
           <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:gap-6 opacity-0 animate-[drop-in_1000ms_cubic-bezier(0.2,0.8,0.2,1)_2.0s_both]">
             <Link
               href="/contact"
-              className="group relative overflow-visible rounded-full border border-black/15 bg-transparent px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-all duration-300 hover:border-black/30 hover:bg-black/5 hover:-translate-y-0.5"
+              className="group relative overflow-visible rounded-full border border-black/15 bg-transparent px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-all duration-300 ease-out hover:border-black/40 hover:bg-black/10 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/10 active:scale-95"
               style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
             >
-              <span className="relative z-10 flex items-center gap-2">
-                Have us fly out to you
-                <Plane
-                  className="h-4 w-4 transition-all duration-500 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0"
-                  aria-hidden="true"
-                />
+              <span className="relative z-10">
+                Get in touch
               </span>
 
               {/* Tooltip */}
               <div className="absolute left-1/2 top-full mt-4 w-72 -translate-x-1/2 rounded-xl border border-black/10 bg-white p-4 text-left text-xs leading-relaxed text-black/80 opacity-0 shadow-xl transition-all duration-300 group-hover:visible group-hover:opacity-100 invisible z-50">
-                We take our potential clients very seriously - we will fly out
-                to you to learn about your business's bottleneck without
-                expectation of a sale.
+                We work directly with AI labs to understand your labor needs and provide cost-effective solutions.
               </div>
             </Link>
           </div>
@@ -85,7 +78,7 @@ export default function Home() {
             className="text-left text-4xl font-normal leading-[1.12] tracking-tight text-black/85 sm:text-5xl"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            “Vindium literally eliminated 40% of the B.S. I deal with at work.”
+            "Data Chateau cut our labor costs by 50% while maintaining quality."
           </blockquote>
         </div>
       </section>
@@ -96,17 +89,14 @@ export default function Home() {
           className="text-3xl font-normal leading-[1.15] tracking-tight text-black sm:text-4xl"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
-          We’ve found most private lenders leave 30–40% of deal flow on the
-          table every month.
+          Most AI labs spend 40–60% of their budget on human labor costs.
         </h2>
         <h2 className="mt-6 text-base leading-7 text-black/80 subhead-copy sm:text-lg">
-          Manual intake and underwriting bottlenecks limit how many loans your
-          team can process.{" "}
+          Scaling operations requires skilled workers, but{" "}
           <span className="emphasis-highlight">
-            Hiring and training analysts is expensive and slow
+            hiring full-time staff is expensive and slow
           </span>
-          . Vindium automates those repetitive workflows so your team can handle
-          every deal that comes in.
+          . Data Chateau provides the same quality work at a fraction of the cost, so you can scale faster.
         </h2>
       </section>
 

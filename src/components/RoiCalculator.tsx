@@ -13,44 +13,43 @@ function formatCurrency(value: number): string {
 
 export default function RoiCalculator() {
   // Inputs
-  const [inboundLoansPerMonth, setInboundLoansPerMonth] = useState<number>(40); // 10–100
-  const [avgLoanSize, setAvgLoanSize] = useState<number>(5_000_000); // 1.5m–200m
-  const [numAnalysts, setNumAnalysts] = useState<number>(5);
+  const [weeklyRecordedHours, setWeeklyRecordedHours] = useState<number>(1000); // 250–7000
+  const [avgHourlyRate, setAvgHourlyRate] = useState<number>(75); // $25–$200
+  const [numFullTimeStaff, setNumFullTimeStaff] = useState<number>(10);
 
   // Hidden constants
-  const ANALYST_COST_PER_YEAR = 170_000;
-  const APPROVAL_RATE = 0.6; // 60% funded
-  const REVENUE_MARGIN_PCT = 0.02; // 2% all-in revenue per funded loan
+  const FULL_TIME_COST_PER_YEAR = 120_000; // Average cost per FTE including overhead
+  const DATA_CHATEAU_COST_REDUCTION = 0.5; // 50% cost reduction
+  const EFFICIENCY_IMPROVEMENT = 0.4; // 40% more efficient
 
   const results = useMemo(() => {
-    // Logic: Total Value = (Monthly Revenue Lift) + (Monthly Cost Savings)
-    // Efficiency scales down with more analysts (diminishing returns)
-    // Start at 50% for 1 analyst, decay to ~15% for 30 analysts
-    const BASE_EFFICIENCY = 0.5;
-    const DECAY_EXPONENT = -0.35;
-    const efficiencyGain =
-      BASE_EFFICIENCY * Math.pow(numAnalysts, DECAY_EXPONENT);
+    // Logic: Total Value = (Weekly Cost Savings)
+    // Data Chateau provides same quality at 50% cost with 40% efficiency improvement
+    const costReduction = DATA_CHATEAU_COST_REDUCTION;
 
-    // 1. Cost Savings (Monthly)
-    const totalAnalystSpendYear = numAnalysts * ANALYST_COST_PER_YEAR;
-    const annualCostSavings = totalAnalystSpendYear * efficiencyGain;
-    const monthlyCostSavings = annualCostSavings / 12;
+    // 1. Current Weekly Labor Cost
+    const currentWeeklyCost = weeklyRecordedHours * avgHourlyRate;
 
-    // 2. Revenue Capacity (Monthly)
-    const baseMonthlyRevenue =
-      inboundLoansPerMonth * avgLoanSize * APPROVAL_RATE * REVENUE_MARGIN_PCT;
-    const monthlyRevenueLift = baseMonthlyRevenue * efficiencyGain;
+    // 2. Weekly Cost Savings (50% reduction)
+    const weeklyCostSavings = currentWeeklyCost * costReduction;
 
-    // 3. Total Value Impact (Monthly Headline)
-    const totalMonthlyValue = monthlyRevenueLift + monthlyCostSavings;
+    // 3. Annual Cost Savings from Full-Time Staff Replacement
+    const fullTimeStaffCost = numFullTimeStaff * FULL_TIME_COST_PER_YEAR;
+    const annualStaffSavings = fullTimeStaffCost * costReduction;
+    const monthlyStaffSavings = annualStaffSavings / 12;
+
+    // 4. Total Weekly Value Impact (convert monthly staff savings to weekly)
+    const weeklyStaffSavings = monthlyStaffSavings * 12 / 52;
+    const totalWeeklyValue = weeklyCostSavings + weeklyStaffSavings;
 
     return {
-      totalMonthlyValue,
-      monthlyRevenueLift,
-      monthlyCostSavings,
-      efficiencyGain,
+      totalWeeklyValue: totalWeeklyValue,
+      weeklyCostSavings,
+      weeklyStaffSavings,
+      costReduction,
+      efficiencyImprovement: EFFICIENCY_IMPROVEMENT,
     };
-  }, [inboundLoansPerMonth, avgLoanSize, numAnalysts]);
+  }, [weeklyRecordedHours, avgHourlyRate, numFullTimeStaff]);
 
   return (
     <section
@@ -64,88 +63,88 @@ export default function RoiCalculator() {
             className="mb-10 text-3xl font-normal text-black sm:text-4xl"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Predict your capacity lift
+            Calculate your cost savings
           </h4>
 
           <div className="space-y-10">
-            {/* Input 1: Inbound */}
+            {/* Input 1: Weekly Recorded Hours */}
             <div className="border-b border-black/10 pb-8">
               <div className="mb-4 flex items-end justify-between">
                 <label className="text-sm font-medium uppercase tracking-wide text-black/60">
-                  Inbound loan requests / month
+                  Weekly recorded hours needed
                 </label>
                 <span
                   className="text-3xl font-normal text-black"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                  {inboundLoansPerMonth}
+                  {weeklyRecordedHours.toLocaleString()}
                 </span>
               </div>
               <input
                 type="range"
-                min={10}
-                max={100}
-                step={1}
-                value={inboundLoansPerMonth}
+                min={250}
+                max={7000}
+                step={50}
+                value={weeklyRecordedHours}
                 onChange={(e) =>
-                  setInboundLoansPerMonth(Number(e.target.value))
+                  setWeeklyRecordedHours(Number(e.target.value))
                 }
                 className="calc-range"
               />
             </div>
 
-            {/* Input 2: Avg Deal Size */}
+            {/* Input 2: Avg Hourly Rate */}
             <div className="border-b border-black/10 pb-8">
               <div className="mb-4 flex items-end justify-between">
                 <label className="text-sm font-medium uppercase tracking-wide text-black/60">
-                  Average funded loan size (USD)
+                  Current hourly rate (USD)
                 </label>
                 <span
                   className="text-3xl font-normal text-black"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                  {formatCurrency(avgLoanSize)}
+                  ${avgHourlyRate}
                 </span>
               </div>
               <input
                 type="range"
-                min={1_500_000}
-                max={200_000_000}
-                step={500_000}
-                value={avgLoanSize}
-                onChange={(e) => setAvgLoanSize(Number(e.target.value))}
+                min={25}
+                max={200}
+                step={5}
+                value={avgHourlyRate}
+                onChange={(e) => setAvgHourlyRate(Number(e.target.value))}
                 className="calc-range"
               />
             </div>
 
-            {/* Input 3: Analysts */}
+            {/* Input 3: Full-Time Staff */}
             <div className="border-b border-black/10 pb-8">
               <div className="mb-4 flex items-end justify-between">
                 <label className="text-sm font-medium uppercase tracking-wide text-black/60">
-                  Number of analysts
+                  Full-time staff to replace
                 </label>
                 <span
                   className="text-3xl font-normal text-black"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                  {numAnalysts}
+                  {numFullTimeStaff}
                 </span>
               </div>
               <input
                 type="range"
                 min={1}
-                max={30}
+                max={50}
                 step={1}
-                value={numAnalysts}
-                onChange={(e) => setNumAnalysts(Number(e.target.value))}
+                value={numFullTimeStaff}
+                onChange={(e) => setNumFullTimeStaff(Number(e.target.value))}
                 className="calc-range"
               />
             </div>
           </div>
 
           <p className="mt-4 text-xs text-black/50">
-            Assumes {(results.efficiencyGain * 100).toFixed(0)}% efficiency gain
-            from AI automation (diminishing returns with scale).
+            Assumes {(results.costReduction * 100).toFixed(0)}% cost reduction
+            with {(results.efficiencyImprovement * 100).toFixed(0)}% efficiency improvement.
           </p>
         </div>
 
@@ -153,11 +152,12 @@ export default function RoiCalculator() {
         <div className="flex items-center">
           <div className="relative w-full overflow-hidden rounded-2xl bg-[#fffcf5] p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] ring-1 ring-black/5 sm:p-12">
             <div className="mb-8 flex items-center gap-3 opacity-60">
-              <img
-                src="/vinidum-written-logo.svg"
-                alt="Vindium"
-                className="h-6 w-auto"
-              />
+              <span
+                className="text-lg font-normal text-black"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
+                Data Chateau
+              </span>
               <div className="h-px flex-1 bg-black/20"></div>
               <span className="text-xs font-medium uppercase tracking-wider">
                 Projection
@@ -166,38 +166,38 @@ export default function RoiCalculator() {
 
             <div className="space-y-2">
               <p className="text-lg text-black/70">
-                Total monthly value impact:
+                Total weekly savings:
               </p>
               <p
                 className="text-5xl font-normal text-black sm:text-6xl"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
-                {formatCurrency(results.totalMonthlyValue)}
+                {formatCurrency(results.totalWeeklyValue)}
               </p>
             </div>
 
             <div className="mt-10 space-y-6 border-t border-black/10 pt-8">
               <div className="flex justify-between">
                 <span className="text-black/60">
-                  Revenue capacity added (mo)
+                  Hourly labor savings (wk)
                 </span>
                 <span className="font-medium">
-                  {formatCurrency(results.monthlyRevenueLift)}
+                  {formatCurrency(results.weeklyCostSavings)}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-black/60">Analyst cost savings (mo)</span>
+                <span className="text-black/60">Staff replacement savings (wk)</span>
                 <span className="font-medium">
-                  {formatCurrency(results.monthlyCostSavings)}
+                  {formatCurrency(results.weeklyStaffSavings)}
                 </span>
               </div>
             </div>
 
             <Link
               href="/contact"
-              className="mt-10 w-full rounded-full bg-black py-4 text-sm font-medium text-white transition-transform hover:scale-[1.02] active:scale-[0.98] inline-block text-center"
+              className="mt-10 w-full rounded-full bg-black py-4 text-sm font-medium text-white transition-all duration-200 ease-out hover:scale-[1.05] hover:shadow-xl hover:shadow-black/25 active:scale-[0.98] inline-block text-center"
             >
-              Get a detailed report
+              Get a custom quote
             </Link>
           </div>
         </div>

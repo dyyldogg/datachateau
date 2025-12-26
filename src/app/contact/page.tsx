@@ -60,7 +60,7 @@ export default function Contact() {
         className="text-[clamp(2.5rem,5vw,4rem)] font-normal leading-[1.1] tracking-tight text-black text-center mb-12 max-w-2xl"
         style={{ fontFamily: "var(--font-playfair)" }}
       >
-        Let's supercharge your lending team
+        Let's discuss your labor needs
       </h1>
 
       {/* Calendly */}

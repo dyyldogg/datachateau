@@ -18,9 +18,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Vindium — Private, secure, deal-aware AI for private-credit",
+  title: "Data Chateau — Cost-effective human labor for AI labs",
   description:
-    "Vindium gives private-credit lenders instant, secure deal context with RAG and verifiable infrastructure.",
+    "Data Chateau provides skilled human labor at competitive rates to AI labs, helping scale operations without breaking the budget.",
   icons: {
     icon: [
       { url: '/icon.svg', media: '(prefers-color-scheme: light)' },

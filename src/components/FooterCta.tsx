@@ -8,14 +8,14 @@ export default function FooterCta() {
           className="text-3xl font-normal leading-tight tracking-tight text-black sm:text-4xl"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
-          Ready to experience the intelligence gains only Vindium can provide?
+          Ready to reduce your labor costs without sacrificing quality?
         </h2>
         <Link
           href="/contact"
-          className="mt-6 inline-block rounded-full bg-black px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-90 hover:scale-105 active:scale-95"
+          className="mt-6 inline-block rounded-full bg-black px-6 py-3 text-sm font-medium text-white shadow-sm transition-all duration-200 ease-out hover:scale-110 hover:shadow-xl hover:shadow-black/25 active:scale-95"
           style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
         >
-          Book a personal call with the founders
+          Start a conversation
         </Link>
       </div>
     </section>

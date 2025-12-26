@@ -23,7 +23,7 @@ export default function NotFound() {
         <div className="mt-10">
           <Link
             href="/"
-            className="cta-button-primary inline-flex items-center justify-center rounded-full bg-black px-8 py-3 text-sm font-medium text-white transition-transform hover:scale-105 active:scale-95"
+            className="cta-button-primary inline-flex items-center justify-center rounded-full bg-black px-8 py-3 text-sm font-medium text-white transition-all duration-200 ease-out hover:scale-110 hover:shadow-lg hover:shadow-black/25 active:scale-95"
             style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
           >
             Back to Home

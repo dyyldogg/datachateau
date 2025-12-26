@@ -7,8 +7,11 @@ export default function CaseStudy() {
           className="text-4xl font-normal leading-tight tracking-tight text-black sm:text-5xl"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
-          Case study: Bridge Lending Firm
+          Case study: Leading AI Lab*
         </h2>
+        <p className="text-sm text-black/60 italic max-w-md text-center">
+          *You know the one everyone's talking about
+        </p>
       </div>
 
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -42,15 +45,15 @@ export default function CaseStudy() {
             <ul className="ml-2 space-y-3 text-lg text-black/70">
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-black/30 shrink-0" />
-                Manual intake created backlog during peak weeks
+                Labor costs consuming 60% of operational budget
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-black/30 shrink-0" />
-                Analyst time absorbed by data entry grunt work
+                Struggling to scale operations due to high hiring costs
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-black/30 shrink-0" />
-                Deal throughput capped by human availability
+                Quality concerns with cheaper alternatives
               </li>
             </ul>
           </div>
@@ -82,15 +85,15 @@ export default function CaseStudy() {
             <ul className="ml-2 space-y-3 text-lg text-black/70">
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-black/30 shrink-0" />
-                Automated intake & intelligent checklist creation
+                Replaced 15 full-time staff with Data Chateau team
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-black/30 shrink-0" />
-                Structured data extraction directly to models
+                Maintained quality standards while cutting costs in half
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-black/30 shrink-0" />
-                Reviewer-in-the-loop streamlined approvals
+                Scalable workforce that adapts to project needs
               </li>
             </ul>
           </div>
@@ -108,25 +111,25 @@ export default function CaseStudy() {
           <div className="mt-6">
             <div className="flex items-baseline gap-2">
               <span className="text-6xl font-medium tracking-tighter text-black sm:text-7xl">
-                $3.5M
+                $2.1M
               </span>
             </div>
             <p className="mt-2 text-xl text-black/60">
-              added to the bottom line in just 4 months
+              saved annually on labor costs
             </p>
           </div>
 
           <div className="mt-10 grid grid-cols-2 gap-8 border-t border-black/10 pt-8">
             <div>
-              <div className="text-4xl font-medium text-black">40%</div>
+              <div className="text-4xl font-medium text-black">50%</div>
               <div className="mt-1 text-sm font-medium text-black/50">
-                Reduction in Grunt Work
+                Cost Reduction
               </div>
             </div>
             <div>
-              <div className="text-4xl font-medium text-black">2x</div>
+              <div className="text-4xl font-medium text-black">100%</div>
               <div className="mt-1 text-sm font-medium text-black/50">
-                Deal Throughput
+                Quality Maintained
               </div>
             </div>
           </div>

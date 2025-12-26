@@ -10,12 +10,12 @@ export default function Values() {
               className="text-3xl font-normal leading-tight tracking-tight sm:text-4xl"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Security and compliance
+              Quality and reliability
             </h2>
             <p className="mt-3 max-w-2xl text-sm text-white/80 subhead-copy sm:text-base">
-              Your trust is our priority. Our security and compliance practices are
-              designed to meet high regulatory standards, ensuring your firm’s
-              sensitive data stays protected.
+              We maintain the same quality standards as full-time staff while providing
+              cost-effective solutions. Our team is vetted, trained, and committed to
+              your success.
             </p>
 
             <div className="mt-8 grid gap-8 sm:grid-cols-3">
@@ -24,11 +24,11 @@ export default function Values() {
                   className="text-xl font-medium text-white"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                  Private workspace
+                  Skilled workforce
                 </h3>
                 <ul className="mt-3 space-y-2 text-sm text-white/80 subhead-copy">
-                  <li>End to end encryption</li>
-                  <li>Enterprise grade security</li>
+                  <li>Vetted professionals</li>
+                  <li>Domain expertise</li>
                 </ul>
               </div>
               <div>
@@ -36,11 +36,11 @@ export default function Values() {
                   className="text-xl font-medium text-white"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                  Data privacy
+                  Cost effective
                 </h3>
                 <ul className="mt-3 space-y-2 text-sm text-white/80 subhead-copy">
-                  <li>Protected data pipeline</li>
-                  <li>Controlled access</li>
+                  <li>50% cost reduction</li>
+                  <li>No overhead burden</li>
                 </ul>
               </div>
               <div>
@@ -48,11 +48,11 @@ export default function Values() {
                   className="text-xl font-medium text-white"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                  360° data protection
+                  Scalable operations
                 </h3>
                 <ul className="mt-3 space-y-2 text-sm text-white/80 subhead-copy">
-                  <li>Flexible deployments</li>
-                  <li>Team permissioning</li>
+                  <li>Flexible capacity</li>
+                  <li>Quick ramp-up</li>
                 </ul>
               </div>
             </div>
@@ -60,9 +60,9 @@ export default function Values() {
 
           <div className="flex items-start justify-center lg:justify-end">
             <div className="rounded-xl border border-white/20 bg-white/5 p-6 text-center shadow-[0_0_30px_-10px_rgba(255,255,255,0.1)] backdrop-blur-sm">
-              <div className="text-sm uppercase tracking-wide text-white/70">We are</div>
-              <div className="mt-1 text-xl font-semibold text-white">SOC 2</div>
-              <div className="mt-1 text-sm text-white/70">Compliant</div>
+              <div className="text-sm uppercase tracking-wide text-white/70">Quality</div>
+              <div className="mt-1 text-xl font-semibold text-white">100%</div>
+              <div className="mt-1 text-sm text-white/70">Maintained</div>
             </div>
           </div>
         </div>
@@ -78,11 +78,11 @@ export default function Values() {
                   className="text-xl font-medium text-white"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                  Human in the loop
+                  Direct communication
                 </h3>
                 <p className="mt-2 max-w-xl text-sm text-white/80 subhead-copy">
-                  We keep finance professionals at the heart of every decision for accuracy
-                  and confidence at every step.
+                  Work directly with our team. No middlemen, no bureaucracy. Clear
+                  communication and fast iteration.
                 </p>
               </div>
             </div>
@@ -95,11 +95,11 @@ export default function Values() {
                   className="text-xl font-medium text-white"
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
-                  Customer obsession
+                  Long-term partnership
                 </h3>
                 <p className="mt-2 max-w-xl text-sm text-white/80 subhead-copy">
-                  We deliver tailored integrations and iterate fast so our offering evolves
-                  with you and provides value at every step.
+                  We build relationships, not transactions. Our team becomes an extension
+                  of yours, understanding your needs and delivering consistently.
                 </p>
               </div>
             </div>
