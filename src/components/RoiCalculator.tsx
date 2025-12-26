@@ -15,41 +15,46 @@ export default function RoiCalculator() {
   // Inputs
   const [weeklyRecordedHours, setWeeklyRecordedHours] = useState<number>(1000); // 250–7000
   const [avgHourlyRate, setAvgHourlyRate] = useState<number>(75); // $25–$200
-  const [numFullTimeStaff, setNumFullTimeStaff] = useState<number>(10);
 
   // Hidden constants
-  const FULL_TIME_COST_PER_YEAR = 120_000; // Average cost per FTE including overhead
-  const DATA_CHATEAU_COST_REDUCTION = 0.5; // 50% cost reduction
+  const COST_REDUCTION = 0.4; // 40% cheaper
   const EFFICIENCY_IMPROVEMENT = 0.4; // 40% more efficient
+  const WEEKS_PER_MONTH = 4.33;
 
   const results = useMemo(() => {
-    // Logic: Total Value = (Weekly Cost Savings)
-    // Data Chateau provides same quality at 50% cost with 40% efficiency improvement
-    const costReduction = DATA_CHATEAU_COST_REDUCTION;
-
-    // 1. Current Weekly Labor Cost
+    // Current weekly cost
     const currentWeeklyCost = weeklyRecordedHours * avgHourlyRate;
-
-    // 2. Weekly Cost Savings (50% reduction)
-    const weeklyCostSavings = currentWeeklyCost * costReduction;
-
-    // 3. Annual Cost Savings from Full-Time Staff Replacement
-    const fullTimeStaffCost = numFullTimeStaff * FULL_TIME_COST_PER_YEAR;
-    const annualStaffSavings = fullTimeStaffCost * costReduction;
-    const monthlyStaffSavings = annualStaffSavings / 12;
-
-    // 4. Total Weekly Value Impact (convert monthly staff savings to weekly)
-    const weeklyStaffSavings = monthlyStaffSavings * 12 / 52;
-    const totalWeeklyValue = weeklyCostSavings + weeklyStaffSavings;
+    
+    // With Data Chateau:
+    // - 40% more efficient = only need 60% of the hours
+    const efficientHours = weeklyRecordedHours * (1 - EFFICIENCY_IMPROVEMENT);
+    
+    // - 40% cheaper = pay 60% of the rate
+    const reducedRate = avgHourlyRate * (1 - COST_REDUCTION);
+    
+    // New weekly cost with Data Chateau
+    const newWeeklyCost = efficientHours * reducedRate;
+    
+    // Weekly savings
+    const weeklySavings = currentWeeklyCost - newWeeklyCost;
+    
+    // Monthly savings (4.33 weeks per month on average)
+    const monthlySavings = weeklySavings * WEEKS_PER_MONTH;
+    
+    // Annual savings for marketing
+    const annualSavings = monthlySavings * 12;
+    
+    // Hours saved per week due to efficiency
+    const hoursSaved = weeklyRecordedHours * EFFICIENCY_IMPROVEMENT;
 
     return {
-      totalWeeklyValue: totalWeeklyValue,
-      weeklyCostSavings,
-      weeklyStaffSavings,
-      costReduction,
+      monthlySavings,
+      annualSavings,
+      hoursSaved: hoursSaved * WEEKS_PER_MONTH, // monthly hours saved
+      costReduction: COST_REDUCTION,
       efficiencyImprovement: EFFICIENCY_IMPROVEMENT,
     };
-  }, [weeklyRecordedHours, avgHourlyRate, numFullTimeStaff]);
+  }, [weeklyRecordedHours, avgHourlyRate]);
 
   return (
     <section
@@ -117,34 +122,10 @@ export default function RoiCalculator() {
               />
             </div>
 
-            {/* Input 3: Full-Time Staff */}
-            <div className="border-b border-black/10 pb-8">
-              <div className="mb-4 flex items-end justify-between">
-                <label className="text-sm font-medium uppercase tracking-wide text-black/60">
-                  Full-time staff to replace
-                </label>
-                <span
-                  className="text-3xl font-normal text-black"
-                  style={{ fontFamily: "var(--font-playfair)" }}
-                >
-                  {numFullTimeStaff}
-                </span>
-              </div>
-              <input
-                type="range"
-                min={1}
-                max={50}
-                step={1}
-                value={numFullTimeStaff}
-                onChange={(e) => setNumFullTimeStaff(Number(e.target.value))}
-                className="calc-range"
-              />
-            </div>
           </div>
 
           <p className="mt-4 text-xs text-black/50">
-            Assumes {(results.costReduction * 100).toFixed(0)}% cost reduction
-            with {(results.efficiencyImprovement * 100).toFixed(0)}% efficiency improvement.
+            Assumes {(results.costReduction * 100).toFixed(0)}% lower rates and {(results.efficiencyImprovement * 100).toFixed(0)}% greater efficiency than current providers.
           </p>
         </div>
 
@@ -152,12 +133,11 @@ export default function RoiCalculator() {
         <div className="flex items-center">
           <div className="relative w-full overflow-hidden rounded-2xl bg-[#fffcf5] p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] ring-1 ring-black/5 sm:p-12">
             <div className="mb-8 flex items-center gap-3 opacity-60">
-              <span
-                className="text-lg font-normal text-black"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
-                Data Chateau
-              </span>
+              <img
+                src="/datachateau-logo.png"
+                alt="Data Chateau"
+                className="h-6 w-auto"
+              />
               <div className="h-px flex-1 bg-black/20"></div>
               <span className="text-xs font-medium uppercase tracking-wider">
                 Projection
@@ -166,29 +146,29 @@ export default function RoiCalculator() {
 
             <div className="space-y-2">
               <p className="text-lg text-black/70">
-                Total weekly savings:
+                Total monthly savings:
               </p>
               <p
                 className="text-5xl font-normal text-black sm:text-6xl"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
-                {formatCurrency(results.totalWeeklyValue)}
+                {formatCurrency(results.monthlySavings)}
               </p>
             </div>
 
             <div className="mt-10 space-y-6 border-t border-black/10 pt-8">
               <div className="flex justify-between">
                 <span className="text-black/60">
-                  Hourly labor savings (wk)
+                  Annual savings
                 </span>
                 <span className="font-medium">
-                  {formatCurrency(results.weeklyCostSavings)}
+                  {formatCurrency(results.annualSavings)}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-black/60">Staff replacement savings (wk)</span>
+                <span className="text-black/60">Hours saved per month</span>
                 <span className="font-medium">
-                  {formatCurrency(results.weeklyStaffSavings)}
+                  {results.hoursSaved.toFixed(0)}
                 </span>
               </div>
             </div>
